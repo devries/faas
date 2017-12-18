@@ -38,7 +38,6 @@ def not_found(request, exception):
 
 @app.exception(SanicException)
 def other_error(request, exception):
-    print(repr(exception))
     accept_header_value = request.headers.get('Accept','application/json')
     response_mime_type = select_return_type(accept_header_value, ['application/json', 'application/xml'])
 
