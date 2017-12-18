@@ -31,6 +31,13 @@ def not_found(request, exception):
             status_code=404,
             response_mime_type=response_mime_type)
 
+@app.middleware('response')
+async def enable_cors(request, response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token, Authorization, User-Agent, X-Api-Key'
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+
 def fucks_given_response(number_of_fucks, response_mime_type='application/json'):
     if response_mime_type=='application/json':
         retval = response.json({
@@ -128,7 +135,6 @@ def select_return_type(accept_header_value, response_content_types):
                 return_values.append((weight, content_type))
 
     return_values.sort(key=lambda x: x[0], reverse=True)
-    print(return_values)
 
     if len(return_values)>0:
         result = return_values[0][1]
