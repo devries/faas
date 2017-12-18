@@ -11,7 +11,7 @@ servers:
   - url: 'http://localhost:8080/v1'
     description: Testing server
 paths:
-  '/give/{num}/fucks.{format}':
+  '/give/{num}/fucks':
     get:
       summary: Returns a list of fucks.
       description: 'This is the main fucking point, to get some fucks.'
@@ -22,7 +22,6 @@ paths:
           required: true
           schema:
             type: integer
-        - $ref: '#/components/parameters/formatParam'
       responses:
         '200':
           description: You get the fucks.
@@ -43,17 +42,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/XMLError'
 components:
-  parameters:
-    formatParam:
-      name: format
-      in: path
-      description: This is the fucking return format. It should be either "json" or "xml".
-      required: true
-      schema:
-        type: string
-        enum:
-          - json
-          - xml
   schemas:
     ListOfFucks:
       type: object
