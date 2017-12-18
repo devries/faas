@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  title: Fucks as a Service
+  description: >-
+    This is a fucking API. It gives fucks as a service. What the fucking else do
+    you want?
+  version: '1.0'
+servers:
+  - url: 'https://faas.unnecessary.tech/v1'
+    description: Production server
+  - url: 'http://localhost:8080/v1'
+    description: Testing server
+paths:
+  '/give/{num}/fucks.{format}':
+    get:
+      summary: Returns a list of fucks.
+      description: 'This is the main fucking point, to get some fucks.'
+      parameters:
+        - name: num
+          in: path
+          description: Number of fucks to give.
+          required: true
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: You get the fucks.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOfFucks'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/XMLListOfFucks'
+        '410':
+          description: Out of fucks to give.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/XMLError'
+components:
+  parameters:
+    formatParam:
+      name: format
+      in: path
+      description: This is the fucking return format. It should be either "json" or "xml".
+      required: true
+      schema:
+        type: string
+        enum:
+          - json
+          - xml
+  schemas:
+    ListOfFucks:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Fucking status of call, "ok" is successful.'
+          example: ok
+        fucks:
+          type: array
+          description: A list of fucks returned.
+          items:
+            type: string
+            example: fuck
+            xml:
+              name: item
+          xml:
+            wrapped: true
+    XMLExtra:
+      type: object
+      properties:
+        observation:
+          type: string
+          description: Just a damn observation.
+          example: Why the fuck are you still using XML?
+      xml:
+        namespace: 'http://faas.unnecessary.tech/schema'
+    XMLListOfFucks:
+      allOf:
+        - $ref: '#/components/schemas/ListOfFucks'
+        - $ref: '#/components/schemas/XMLExtra'
+        - type: object
+          xml:
+            name: ListOfFucks
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'Fucking status of call, "error" if there is an error.'
+          example: error
+        message:
+          type: string
+          description: The fucking error message.
+    XMLError:
+      allOf:
+        - $ref: '#/components/schemas/Error'
+        - $ref: '#/components/schemas/XMLExtra'
+        - type: object
+          xml:
+            name: Error
