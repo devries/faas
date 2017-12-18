@@ -1,11 +1,11 @@
 import os
 from sanic import Sanic, response
-from sanic.exceptions import NotFound
+from sanic.exceptions import NotFound, SanicException
 from lxml import etree
 
 app = Sanic(__name__)
 
-@app.route('/v1/give/<num>/fucks')
+@app.route('/v1/give/<num>/fucks', methods=['GET','OPTIONS'])
 async def give_fucks(request, num):
     accept_header_value = request.headers.get('Accept','application/json')
     response_mime_type = select_return_type(accept_header_value, ['application/json', 'application/xml'])
@@ -14,6 +14,11 @@ async def give_fucks(request, num):
         num_asint = int(num)
     except ValueError:
         return error_response('What the fuck kind of number is {}?'.format(num), response_mime_type=response_mime_type)
+
+    if request.method=='OPTIONS':
+        return response.raw(b'',
+                headers={'Allow': 'GET, OPTIONS',
+                    'Content-Type': response_mime_type})
 
     if num_asint>=1000:
         return error_response('No one has that many fucking fucks to give.', status_code=410, reponse_mime_type=response_mime_type)
@@ -31,6 +36,16 @@ def not_found(request, exception):
             status_code=404,
             response_mime_type=response_mime_type)
 
+@app.exception(SanicException)
+def other_error(request, exception):
+    print(repr(exception))
+    accept_header_value = request.headers.get('Accept','application/json')
+    response_mime_type = select_return_type(accept_header_value, ['application/json', 'application/xml'])
+
+    return error_response(exception.args[0],
+            status_code=exception.status_code,
+            response_mime_type=response_mime_type)
+    
 @app.middleware('response')
 async def enable_cors(request, response):
     response.headers['Access-Control-Allow-Origin'] = '*'
