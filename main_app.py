@@ -28,7 +28,7 @@ async def give_fucks(request, num):
         return fucks_given_response(num_asint, response_mime_type=response_mime_type)
 
 @app.exception(NotFound)
-def not_found(request, exception):
+async def not_found(request, exception):
     accept_header_value = request.headers.get('Accept','application/json')
     response_mime_type = select_return_type(accept_header_value, ['application/json', 'application/xml'])
    
@@ -37,7 +37,7 @@ def not_found(request, exception):
             response_mime_type=response_mime_type)
 
 @app.exception(SanicException)
-def other_error(request, exception):
+async def other_error(request, exception):
     accept_header_value = request.headers.get('Accept','application/json')
     response_mime_type = select_return_type(accept_header_value, ['application/json', 'application/xml'])
 
