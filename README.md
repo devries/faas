@@ -1,5 +1,9 @@
 # Fucks as a Service by the Institute for Unnecessary Technology
 
+- [FaaS Homepage](https://faas.unnecessary.tech/)
+- [Github](https://github.com/devries/faas)
+- [API Documentation](https://faas.unnecessary.tech/api/)
+
 ## Introduction
 
 We at the Institute for Unnecessary Technology are pleased to announce our
@@ -37,3 +41,96 @@ cloud technology, which is why we have introduced Fucks as a Service. Fucks as
 a service provides fucks from an almost inexhaustible supply of fucks in the
 cloud. You just ask for the number of fucks you need, and they are provided
 through our user-friendly API. 
+
+## Jumping In
+
+The API fully documented using the recent [OpenAPI 3.0
+Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md),
+so you know there is very little tooling available to produce client software.
+The [openapi.yaml](https://github.com/devries/faas/blob/master/openapi.yaml)
+on github documents the API, although we do our primary development in the
+[bitbucket repository](https://bitbucket.org/devries/faas). The easiest way to
+explor the API, and get a few demo fucks, is using the
+[api explorer](https://faas.unnecessary.tech/api/).
+
+To get some fucks, just perform a GET request to
+`https://faas.unnecessary.tech/v1/get/{num}/fucks` where `{num}` should be
+replaced with the number of fucks you want. For example to get 2 fucks, you
+would make a GET request to `https://faas.unnecessary.tech/v1/get/2/fucks`.
+The command below makes such a request using the [HTTPie](https://httpie.org/)
+lbrary to make the request, [python](https://www.python.org/) to format the
+response, and [Pygments](http://pygments.org/) to colorize the results.
+
+```bash
+http https://faas.unnecessary.tech/v1/give/2/fucks Accept:application/json | python -m json.tool | pygmentize -l json
+```
+
+The above command will return the JSON result below.
+
+```json
+{
+    "fucks": [
+        "fuck",
+        "fuck"
+    ],
+    "status": "ok"
+}
+```
+
+As you can see, the server has gathered and returned the two fucks you
+requested from the cloud, and you now can give those fucks as need be. 
+
+What about errors? Well, the fucks as a service server is full of helpful
+error messages, for example if you try to query the wrong URL, as shown below,
+you get a helpful error message.
+
+```json
+$ http https://faas.unnecessary.tech/v1/give/2/farts Accept:application/json | python -m json.tool | pygmentize -l json
+
+{
+    "message": "What the fucking fuck are you looking for?",
+    "status": "error"
+}
+```
+
+If you ask for `foo` fucks as shown below, you also get a helpful error
+message.
+
+```json
+$ http https://faas.unnecessary.tech/v1/give/foo/fucks Accept:application/json | python -m json.tool | pygmentize -l json
+
+{
+    "message": "What the fuck kind of number is foo?",
+    "status": "error"
+}
+```
+
+Now, I know what you're thinking. JSON is fine, but for my enterprise level
+fucks, I need to take advantage of XML. Well of course, just indicate that you
+accept application/xml in the HTTP Accept header, and we'll give you
+rock-solid enterprise-grade XML fucks.
+
+```xml
+$ http https://faas.unnecessary.tech/v1/give/2/fucks Accept:application/xml | xmllint --format - | pygmentize -l xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ListOfFucks xmlns="http://faas.unnecessary.tech/schema">
+  <status>ok</status>
+  <fucks>
+    <item>fuck</item>
+    <item>fuck</item>
+  </fucks>
+  <observation>Why the fuck are you still using XML?</observation>
+</ListOfFucks>
+```
+
+It also helpfully makes the observation, "Why the fuck are you still using
+XML?"
+
+## Conclusion
+
+At the Institute for Unnecessary Technology we are happy we can fill this
+critically unnecessary need for a cloud-based fucks service. Please note that
+until we complete our first round of venture funding, there may be occasional
+shortage of fucks as we gather more from the clouds. As a result there may be
+occasional quotas.
