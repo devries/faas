@@ -19,11 +19,11 @@ Service.
 can best be described in the medium of memes.
 
 * We've had the inauguration of Donald Trump.<br/> ![How the fuck did this guy win?](static/piccard_win.jpg)
-* The attempt to eliminate the Affordable Care Act.<br/> ![Get the fuck off my
-  Obamacare](static/rent_obamacare.jpg)
+* The attempt to eliminate the Affordable Care Act.<br/>
+  ![Get the fuck off my Obamacare](static/rent_obamacare.jpg)
 * The revelation that most men you admire probably tried to assault a woman or
-  a child at some point.<br/> ![What the fuck is wrong with
-  men?](static/herbert_men.jpg)
+  a child at some point.<br/> 
+  ![What the fuck is wrong with men?](static/herbert_men.jpg)
 * And the new tax plan, which leaves middle-class taxes essentially
   unchanged.<br/>
   ![Where the fuck is that tax cut you promised?](static/trump_tax.jpg)
