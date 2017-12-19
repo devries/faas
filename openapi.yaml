@@ -5,6 +5,9 @@ info:
     This is a fucking API. It gives fucks as a service. What the fucking else do
     you want?
   version: '1.0'
+  contact:
+    name: Christopher De Vries
+    url: 'https://idolstarastronomer.com/'
 servers:
   - url: 'https://faas.unnecessary.tech/v1'
     description: Production server
@@ -50,6 +53,8 @@ components:
           type: string
           description: 'Fucking status of call, "ok" is successful.'
           example: ok
+          enum:
+            - ok
         fucks:
           type: array
           description: A list of fucks returned.
@@ -83,6 +88,8 @@ components:
           type: string
           description: 'Fucking status of call, "error" if there is an error.'
           example: error
+          enum:
+            - error
         message:
           type: string
           description: The fucking error message.

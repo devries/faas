@@ -52,6 +52,10 @@ async def enable_cors(request, response):
     response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token, Authorization, User-Agent, X-Api-Key'
     response.headers['Access-Control-Allow-Credentials'] = 'true'
 
+@app.middleware('response')
+async def set_servername(request, response):
+    response.headers['Server'] = 'fuckservice/1.0'
+
 def fucks_given_response(number_of_fucks, response_mime_type='application/json'):
     if response_mime_type=='application/json':
         retval = response.json({
@@ -158,4 +162,10 @@ def select_return_type(accept_header_value, response_content_types):
     return result
 
 if __name__=='__main__':
+    app.static('/api', './static/api/')
+
+    @app.route('/api/')
+    async def api_index(request):
+        return await response.file('./static/api/index.html')
+
     app.run(host="0.0.0.0", port=8080, debug=True)
