@@ -42,6 +42,19 @@ a service provides fucks from an almost inexhaustible supply of fucks in the
 cloud. You just ask for the number of fucks you need, and they are provided
 through our user-friendly API. 
 
+## Casual Fucking Around
+
+For the casual non-developer, we have now used the amazing power of
+[Extensible Stylesheet Language
+Transformations](https://en.wikipedia.org/wiki/XSLT) to give fucks to a larger
+audience. [Get one fuck](https://faas.unnecessary.tech/v1/give/1/fucks), [get
+two fucks](https://faas.unnecessary.tech/v1/give/2/fucks), [get 10
+fucks](https://faas.unnecessary.tech/v1/give/10/fucks), [get red
+fucks](https://faas.unnecessary.tech/v1/give/red/fucks), or [get 100
+fucks](https://faas.unnecessary.tech/v1/give/100/fucks) all from the comfort of
+your browser. No need to parse JSON or XML, just count the fucks as they come
+in and then you can easily and quickly get back to giving fucks again.
+
 ## Jumping In
 
 The API fully documented using the recent [OpenAPI 3.0
