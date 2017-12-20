@@ -5,6 +5,8 @@ from lxml import etree
 
 app = Sanic(__name__)
 
+xslt_url='https://faas.unnecessary.tech/fuckformat.xslt'
+
 @app.route('/v1/give/<num>/fucks', methods=['GET','OPTIONS'])
 async def give_fucks(request, num):
     accept_header_value = request.headers.get('Accept','application/json')
@@ -76,7 +78,8 @@ def fucks_given_response(number_of_fucks, response_mime_type='application/json')
         observation = etree.SubElement(root, '{http://faas.unnecessary.tech/schema}observation')
         observation.text = 'Why the fuck are you still using XML?'
 
-        retval = response.raw(etree.tostring(root, encoding='UTF-8', xml_declaration=True),
+        root.addprevious(etree.PI('xml-stylesheet', 'type="text/xsl" href="{}"'.format(xslt_url)))
+        retval = response.raw(etree.tostring(root.getroottree(), encoding='UTF-8', xml_declaration=True),
                 headers={'Content-Type': 'application/xml'},
                 status=200)
 
@@ -104,7 +107,8 @@ def error_response(error_message, status_code=500, response_mime_type='applicati
         observation = etree.SubElement(root, '{http://faas.unnecessary.tech/schema}observation')
         observation.text = 'Why the fuck are you still using XML?'
 
-        retval = response.raw(etree.tostring(root, encoding='UTF-8', xml_declaration=True),
+        root.addprevious(etree.PI('xml-stylesheet', 'type="text/xsl" href="{}"'.format(xslt_url)))
+        retval = response.raw(etree.tostring(root.getroottree(), encoding='UTF-8', xml_declaration=True),
                 headers={'Content-Type': 'application/xml'},
                 status=status_code)
     else:
