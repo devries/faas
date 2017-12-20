@@ -25,7 +25,7 @@
 
   <xsl:template match="fck:Error">
     <h1>Error</h1>
-    <p><xsl:value-of select="fck:message"/></p>
+    <p style="color: red"><xsl:value-of select="fck:message"/></p>
   </xsl:template>
 
 </xsl:stylesheet>
