@@ -17,7 +17,7 @@
   <xsl:template match="fck:ListOfFucks">
     <h1>Fucks given</h1>
     <xsl:choose>
-      <xsl:when test="fck:fucks/count(*) = 0">
+      <xsl:when test="count(fck:fucks/fck:item) = 0">
         <p>Absolutely no fucks given.</p>
       </xsl:when>
       <xsl:otherwise>
