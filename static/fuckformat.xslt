@@ -16,11 +16,16 @@
 
   <xsl:template match="fck:ListOfFucks">
     <h1>Fucks given</h1>
-    <ul>
-      <xsl:for-each select="fck:fucks/fck:item">
-        <li><xsl:value-of select="."/></li>
-      </xsl:for-each>
-    </ul>
+    <xsl:when test="fck:fucks/count(*) = 0">
+      <p>Absolutely no fucks given.</p>
+    </xsl:when>
+    <xsl:otherwise>
+      <ul>
+        <xsl:for-each select="fck:fucks/fck:item">
+          <li><xsl:value-of select="."/></li>
+        </xsl:for-each>
+      </ul>
+    </xsl:otherwise>
   </xsl:template>
 
   <xsl:template match="fck:Error">

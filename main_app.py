@@ -26,6 +26,8 @@ async def give_fucks(request, num):
         return error_response('No one has that many fucking fucks to give.', status_code=410, response_mime_type=response_mime_type)
     elif num_asint>20:
         return error_response("Sorry, that's just too many fucks to give.", status_code=410, response_mime_type=response_mime_type)
+    elif num_asint<0:
+        return error_response("Negative fucks? Are you fucking kidding me? Real cute... asshole.", status_code=400, response_mime_type=response_mime_type)
     else:
         return fucks_given_response(num_asint, response_mime_type=response_mime_type)
 
