@@ -65,6 +65,21 @@
                 }
               }
             }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/XMLError"
+                }
+              }
+            }
           }
         }
       }
