@@ -67,9 +67,9 @@ explor the API, and get a few demo fucks, is using the
 [api explorer](https://faas.unnecessary.tech/api/).
 
 To get some fucks, just perform a GET request to
-`https://faas.unnecessary.tech/v1/get/{num}/fucks` where `{num}` should be
+`https://faas.unnecessary.tech/v1/give/{num}/fucks` where `{num}` should be
 replaced with the number of fucks you want. For example to get 2 fucks, you
-would make a GET request to `https://faas.unnecessary.tech/v1/get/2/fucks`.
+would make a GET request to `https://faas.unnecessary.tech/v1/give/2/fucks`.
 The command below makes such a request using the [HTTPie](https://httpie.org/)
 lbrary to make the request, [python](https://www.python.org/) to format the
 response, and [Pygments](http://pygments.org/) to colorize the results.
