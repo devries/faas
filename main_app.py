@@ -59,6 +59,7 @@ async def enable_cors(request, response):
 @app.middleware('response')
 async def set_servername(request, response):
     response.headers['Server'] = 'fuckservice/1.0'
+    response.headers['Cache-Control'] = 'no-cache'
 
 def fucks_given_response(number_of_fucks, response_mime_type='application/json'):
     if response_mime_type=='application/json':
