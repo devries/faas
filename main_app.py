@@ -168,11 +168,15 @@ def select_return_type(accept_header_value, response_content_types):
 
     return result
 
-if __name__=='__main__':
-    app.static('/api', './static/api/')
+app.static('', './static/')
+app.static('/', './static/index.html')
+app.static('/api/', './static/api/index.html')
 
-    @app.route('/api/')
-    async def api_index(request):
-        return await response.file('./static/api/index.html')
+if __name__=='__main__':
+    #app.static('/api', './static/api/')
+
+    #@app.route('/api/')
+    #async def api_index(request):
+    #    return await response.file('./static/api/index.html')
 
     app.run(host="0.0.0.0", port=8080, debug=True)
