@@ -10,6 +10,7 @@
       </head>
       <body>
         <xsl:apply-templates/>
+        <p>Check out this semantic fucking web page.</p>
       </body>
     </html>
   </xsl:template>
