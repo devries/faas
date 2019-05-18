@@ -20,7 +20,8 @@ async def give_fucks(request, num):
     if request.method=='OPTIONS':
         return response.raw(b'',
                 headers={'Allow': 'GET, OPTIONS',
-                    'Content-Type': response_mime_type})
+                    'Content-Type': response_mime_type,
+                    'Cache-Control': 'no-cache'})
 
     if num_asint>=1000:
         return error_response('No one has that many fucking fucks to give.', status_code=410, response_mime_type=response_mime_type)
@@ -59,7 +60,12 @@ async def enable_cors(request, response):
 @app.middleware('response')
 async def set_servername(request, response):
     response.headers['Server'] = 'fuckservice/1.0'
-    response.headers['Cache-Control'] = 'no-cache'
+    #response.headers['Cache-Control'] = 'no-cache'
+    if 'Cache-Control' not in response.headers:
+        if response.headers.get('Content-Type')=='text/html':
+            response.headers['Cache-Control'] = 'max-age=3600'
+        else:
+            response.headers['Cache-Control'] = 'max-age=1209600'
 
 def fucks_given_response(number_of_fucks, response_mime_type='application/json'):
     if response_mime_type=='application/json':
@@ -67,6 +73,7 @@ def fucks_given_response(number_of_fucks, response_mime_type='application/json')
             'status': 'ok',
             'fucks': ['fuck']*number_of_fucks
             },
+            headers={'Cache-Control': 'no-cache'},
             status=200)
     elif response_mime_type=='application/xml':
         nsmap = {None: 'http://faas.unnecessary.tech/schema'}
@@ -83,7 +90,8 @@ def fucks_given_response(number_of_fucks, response_mime_type='application/json')
 
         root.addprevious(etree.PI('xml-stylesheet', 'type="text/xsl" href="{}"'.format(xslt_url)))
         retval = response.raw(etree.tostring(root.getroottree(), encoding='UTF-8', xml_declaration=True),
-                headers={'Content-Type': 'application/xml'},
+                headers={'Content-Type': 'application/xml',
+                    'Cache-Control': 'no-cache'},
                 status=200)
 
     else:
@@ -97,6 +105,7 @@ def error_response(error_message, status_code=500, response_mime_type='applicati
             'status': 'error',
             'message': error_message
             },
+            headers={'Cache-Control': 'no-cache'},
             status=status_code)
     elif response_mime_type=='application/xml':
         nsmap = {None: 'http://faas.unnecessary.tech/schema'}
@@ -112,7 +121,8 @@ def error_response(error_message, status_code=500, response_mime_type='applicati
 
         root.addprevious(etree.PI('xml-stylesheet', 'type="text/xsl" href="{}"'.format(xslt_url)))
         retval = response.raw(etree.tostring(root.getroottree(), encoding='UTF-8', xml_declaration=True),
-                headers={'Content-Type': 'application/xml'},
+                headers={'Content-Type': 'application/xml',
+                    'Cache-Control': 'no-cache'},
                 status=status_code)
     else:
         retval = error_response('What fucking mime type do you want for your reponse?')
